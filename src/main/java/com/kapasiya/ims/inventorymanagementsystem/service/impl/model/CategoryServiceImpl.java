@@ -58,5 +58,21 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    @Override
+    public CustomResponseDto<Void> deleteCategory(String categoryId) {
+        log.info("Deleting Category : {}", categoryId);
+        try {
+            if (!categoryRepo.existsById(categoryId)) {
+                log.info("Category does not exist with id : {}", categoryId);
+                throw new CategoryException("Category does not exist with id : " + categoryId);
+            }
+            categoryRepo.deleteById(categoryId);
+            return ResponseUtil.successMessageResponse(HttpStatus.NO_CONTENT, "Category Deleted Successfully");
+        }catch (CategoryException cx) {
+            log.info("Exception while deleting the category: {}", categoryId);
+            throw new CategoryException("Error While creating category: " + cx.getMessage());
+        }
+    }
+
 
 }

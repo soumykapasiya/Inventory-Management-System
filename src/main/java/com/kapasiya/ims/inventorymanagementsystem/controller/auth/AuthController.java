@@ -1,6 +1,7 @@
 package com.kapasiya.ims.inventorymanagementsystem.controller.auth;
 
 import com.kapasiya.ims.inventorymanagementsystem.dto.request.LoginRequestDto;
+import com.kapasiya.ims.inventorymanagementsystem.dto.request.RoleRequestDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.request.UserRequestDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomResponseDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.LoginResponseDto;
@@ -66,5 +67,25 @@ public class AuthController {
         CustomResponseDto<LoginResponseDto> userResponseDto = authService.login(loginRequestDto);
         log.info("Login successful");
         return ResponseEntity.status(HttpStatus.OK).body(userResponseDto);
+    }
+
+    @Operation(summary = "Creating Role")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Role created successfully",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CustomResponseDto.class)
+                            )}),
+            @ApiResponse(responseCode = "400", description = "Invalid input", content = @Content)
+    })
+    @PostMapping("/createRole")
+    public ResponseEntity<CustomResponseDto<Void>> createRole(@Valid @RequestBody RoleRequestDto roleRequestDto) {
+        log.info("Creating Role with name {}", roleRequestDto.getName());
+        CustomResponseDto<Void> response = authService.createRole(roleRequestDto);
+        log.info("Role Created with: {}", response);
+        return ResponseEntity.ok().body(response);
     }
 }

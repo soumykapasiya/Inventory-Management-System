@@ -12,4 +12,6 @@ public interface CategoryRepo extends ElasticsearchRepository<Category, String> 
     Optional<Category> findByCategoryName(String name);
 
     boolean existsByCategoryName(String name);
+
+    boolean existsById(String CategoryId);
 }

@@ -62,4 +62,23 @@ public class CategoryController {
         return ResponseEntity.ok().body(responseDto);
     }
 
+    @Operation(summary = "Delete Category")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Deleting Category by Id",
+                    content = {
+                            @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = CustomResponseDto.class)
+                            )}),
+            @ApiResponse(responseCode = "400", description = "Invalid input", content = @Content)
+    })
+    @DeleteMapping("/delete")
+    public ResponseEntity<CustomResponseDto<Void>> deleteCategory(@RequestParam String categoryId) {
+        log.info("Deleting Category");
+        CustomResponseDto<Void> responseDto = categoryService.deleteCategory(categoryId);
+        return ResponseEntity.ok().body(responseDto);
+    }
+
 }

@@ -10,4 +10,6 @@ public interface CategoryService {
     CustomResponseDto<Void> addCategory(CategoryRequestDto requestDto);
 
     CustomResponseDto<List<CategoryResponseDto>> getAllCategories();
+
+    CustomResponseDto<Void> deleteCategory(String categoryId);
 }

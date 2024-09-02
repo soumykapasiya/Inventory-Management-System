@@ -1,12 +1,15 @@
 package com.kapasiya.ims.inventorymanagementsystem.service.impl.auth;
 
 import com.kapasiya.ims.inventorymanagementsystem.dto.request.LoginRequestDto;
+import com.kapasiya.ims.inventorymanagementsystem.dto.request.RoleRequestDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.request.UserRequestDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomResponseDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.LoginResponseDto;
 import com.kapasiya.ims.inventorymanagementsystem.entities.auth.Role;
 import com.kapasiya.ims.inventorymanagementsystem.entities.auth.User;
+import com.kapasiya.ims.inventorymanagementsystem.exception.custom.RoleException;
 import com.kapasiya.ims.inventorymanagementsystem.exception.custom.UserException;
+import com.kapasiya.ims.inventorymanagementsystem.mapper.RoleMapper;
 import com.kapasiya.ims.inventorymanagementsystem.repository.mongo.RoleRepository;
 import com.kapasiya.ims.inventorymanagementsystem.repository.mongo.UserRepository;
 import com.kapasiya.ims.inventorymanagementsystem.service.def.auth.AuthService;
@@ -46,6 +49,28 @@ public class AuthServiceImpl implements AuthService {
 
     @Value("${jwt.token-validity}")
     private Long jwtExpirationInMS;
+
+    @Override
+    public CustomResponseDto<Void> createRole(RoleRequestDto requestDTO) {
+        log.info("Creating Role with Request: {} ", requestDTO);
+        try {
+            if (roleRepository.existsByName(requestDTO.getName())) {
+                log.info("Role with name {} already exists", requestDTO.getName());
+                throw new RoleException("Role with name " + requestDTO.getName() + " already exists");
+            }
+            Role role = RoleMapper.toEntity(requestDTO);
+            roleRepository.save(role);
+            log.info("Role with name {} has been created", requestDTO.getName());
+
+            return ResponseUtil.successMessageResponse(HttpStatus.CREATED, "Role Created Successfully..");
+        } catch (RoleException re) {
+            log.error("Exception Wile Creating Role: {}", re.getMessage());
+            throw re;
+        } catch (Exception e) {
+            log.error("Exception Occurred Wile Creating Role: {}", e.getMessage(), e);
+            throw new RoleException("Error while creating Role: " + requestDTO.getName());
+        }
+    }
 
     @Override
     @Transactional
