@@ -1,0 +1,17 @@
+server:
+  port: 9696
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/ims
+
+  elasticsearch:
+    uris: http://localhost:9200/ims
+    username: elastic
+    password: i81j4JU-=iml86jShzZp
+
+jwt:
+  token-validity: 3600
+  secret: ===#===secret===he===batana===mat===#===
+
