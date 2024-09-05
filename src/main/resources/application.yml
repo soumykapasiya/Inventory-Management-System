@@ -1,6 +1,10 @@
 server:
   port: 9696
 
+logging:
+  file:
+    name: C:\elastic-stack\LogFiles\elk.log
+
 spring:
   data:
     mongodb:
@@ -14,4 +18,5 @@ spring:
 jwt:
   token-validity: 3600
   secret: ===#===secret===he===batana===mat===#===
+
 
