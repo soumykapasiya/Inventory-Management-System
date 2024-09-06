@@ -75,10 +75,9 @@ public class ProductServiceImpl implements ProductService {
         try {
             Iterable<Product> listOfProduct = productRepo.findAll();
             List<ProductResponseDto> productResponseDtoList = new ArrayList<>();
-            listOfProduct.forEach(item -> {
-                ProductResponseDto temp = ProductMapper.toRDto(item);
-                productResponseDtoList.add(temp);
-            });
+            for(Product product : listOfProduct) {
+                productResponseDtoList.add(ProductMapper.toRDto(product));
+            }
             return ResponseUtil.successDataResponse(HttpStatus.OK, "All products successfully", productResponseDtoList);
         } catch (ProductException e) {
             log.info("Exception while getting all products: {}", e.getMessage());

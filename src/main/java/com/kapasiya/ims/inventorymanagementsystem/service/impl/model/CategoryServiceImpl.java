@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepo categoryRepo;
 
     @Override
+    @Transactional
     public CustomResponseDto<Void> addCategory(CategoryRequestDto requestDto) {
         log.info("Adding Category With Request: {} ", requestDto);
         try {
@@ -59,6 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    @Transactional
     public CustomResponseDto<Void> deleteCategory(String categoryId) {
         log.info("Deleting Category : {}", categoryId);
         try {
@@ -68,7 +71,7 @@ public class CategoryServiceImpl implements CategoryService {
             }
             categoryRepo.deleteById(categoryId);
             return ResponseUtil.successMessageResponse(HttpStatus.NO_CONTENT, "Category Deleted Successfully");
-        }catch (CategoryException cx) {
+        } catch (CategoryException cx) {
             log.info("Exception while deleting the category: {}", categoryId);
             throw new CategoryException("Error While creating category: " + cx.getMessage());
         }

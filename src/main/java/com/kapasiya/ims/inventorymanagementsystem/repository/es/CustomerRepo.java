@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CustomerRepo extends ElasticsearchRepository<Customer, String> {
+
+    boolean existsByEmail(String email);
 }

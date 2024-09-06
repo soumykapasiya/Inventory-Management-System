@@ -1,6 +1,7 @@
 package com.kapasiya.ims.inventorymanagementsystem.exception.global;
 
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomErrorResponseDto;
+import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomResponseDto;
 import com.kapasiya.ims.inventorymanagementsystem.exception.custom.*;
 import com.kapasiya.ims.inventorymanagementsystem.utils.ResponseUtil;
 import org.springframework.http.HttpStatus;
@@ -46,6 +47,22 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(SupplierException.class)
     public ResponseEntity<CustomErrorResponseDto> supplierExceptionHandler(SupplierException e, WebRequest request) {
+        CustomErrorResponseDto customErrorResponse = ResponseUtil.buildErrorResponse(
+                HttpStatus.NOT_FOUND, e.getMessage(), request.getDescription(false)
+        );
+        return ResponseEntity.ok().body(customErrorResponse);
+    }
+
+    @ExceptionHandler(CustomerException.class)
+    public ResponseEntity<CustomErrorResponseDto> customExceptionHandler(CustomerException cx, WebRequest request) {
+        CustomErrorResponseDto customErrorResponse = ResponseUtil.buildErrorResponse(
+                HttpStatus.NOT_FOUND, cx.getMessage(), request.getDescription(false)
+        );
+        return ResponseEntity.ok().body(customErrorResponse);
+    }
+
+    @ExceptionHandler(TransactionException.class)
+    public ResponseEntity<CustomErrorResponseDto> transactionExceptionHandler(TransactionException e, WebRequest request) {
         CustomErrorResponseDto customErrorResponse = ResponseUtil.buildErrorResponse(
                 HttpStatus.NOT_FOUND, e.getMessage(), request.getDescription(false)
         );

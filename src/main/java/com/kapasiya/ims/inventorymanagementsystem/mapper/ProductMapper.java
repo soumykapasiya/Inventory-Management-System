@@ -15,7 +15,6 @@ public class ProductMapper {
         if (requestDto == null) {
             return null;
         }
-
         return Product.builder()
                 .productName(requestDto.getProductName())
                 .description(requestDto.getDescription())
@@ -28,7 +27,6 @@ public class ProductMapper {
         if (product == null) {
             return null;
         }
-
         return ProductResponseDto.builder()
                 .productName(product.getProductName())
                 .description(product.getDescription())
