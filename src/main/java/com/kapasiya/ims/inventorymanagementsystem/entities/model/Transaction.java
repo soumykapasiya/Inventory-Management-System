@@ -1,29 +1,28 @@
 package com.kapasiya.ims.inventorymanagementsystem.entities.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
+import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.FieldType;
+import com.kapasiya.ims.inventorymanagementsystem.entities.base.BaseEntity;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(indexName = "category")
-public class Transaction {
+@EqualsAndHashCode(callSuper = true)
+@Document(indexName = "transaction")
+public class Transaction extends BaseEntity {
 
-    @Id
-    private String transactionId;
     private int quantity;
     private String transactionType;
-
-    @Field(type = FieldType.Date)
-    private String transactionDate;
     private String description;
+    private double amount;
 
     @Field(type = FieldType.Object)
-    private Product product;
-
+    private List<Product> product;
 }
