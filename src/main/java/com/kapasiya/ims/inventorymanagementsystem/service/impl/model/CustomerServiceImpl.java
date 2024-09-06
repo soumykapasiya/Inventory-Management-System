@@ -2,6 +2,7 @@ package com.kapasiya.ims.inventorymanagementsystem.service.impl.model;
 
 import com.kapasiya.ims.inventorymanagementsystem.dto.request.CustomerRequestDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomResponseDto;
+import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomerResponseDto;
 import com.kapasiya.ims.inventorymanagementsystem.entities.model.Customer;
 import com.kapasiya.ims.inventorymanagementsystem.exception.custom.CustomerException;
 import com.kapasiya.ims.inventorymanagementsystem.mapper.CustomerMapper;
@@ -13,7 +14,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -24,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional
-    public CustomResponseDto<Void> addCustomer(@RequestBody CustomerRequestDto requestDto) {
+    public CustomResponseDto<Void> addCustomer(CustomerRequestDto requestDto) {
         log.info("Adding Customer With Request: {}", requestDto);
         try {
             if (customerRepo.existsByEmail(requestDto.getEmail())) {
@@ -41,7 +44,20 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-
-
-
+    @Override
+    public CustomResponseDto<List<CustomerResponseDto>> getAllCustomers() {
+        log.info("Get All Customer List From Database");
+        try {
+            Iterable<Customer> customersList = customerRepo.findAll();
+            List<CustomerResponseDto> responseList = new ArrayList<>();
+            for (Customer customer : customersList) {
+                CustomerResponseDto dto = CustomerMapper.toRDto(customer);
+                responseList.add(dto);
+            }
+            return ResponseUtil.successDataResponse(HttpStatus.OK,"Getting All Customer List Successfully", responseList);
+        } catch (CustomerException cx){
+            log.info("Exception While Getting All Customer List: {}", cx.getMessage());
+            throw new CustomerException(cx.getMessage());
+        }
+    }
 }

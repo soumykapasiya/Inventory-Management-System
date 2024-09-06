@@ -37,7 +37,7 @@ public class CategoryController {
             @ApiResponse(responseCode = "400", description = "Invalid input", content = @Content)
     })
     @PostMapping("/create")
-    public ResponseEntity<CustomResponseDto<Void>> create(@RequestBody CategoryRequestDto requestDto) {
+    public ResponseEntity<CustomResponseDto<Void>> createCategory(@RequestBody CategoryRequestDto requestDto) {
         log.info("Creating Category");
         CustomResponseDto<Void> responseDto = categoryService.addCategory(requestDto);
         return ResponseEntity.ok().body(responseDto);
