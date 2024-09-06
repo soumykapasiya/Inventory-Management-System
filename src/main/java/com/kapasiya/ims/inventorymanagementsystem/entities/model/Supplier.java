@@ -24,6 +24,5 @@ public class Supplier extends BaseEntity {
 
     @Email
     private String supplierEmail;
-
     private Set<String> products;
 }

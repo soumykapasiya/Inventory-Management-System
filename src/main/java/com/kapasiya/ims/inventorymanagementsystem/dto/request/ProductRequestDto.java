@@ -14,16 +14,21 @@ import java.util.Set;
 @AllArgsConstructor
 public class ProductRequestDto {
 
-    @NotBlank(message = "Can not be blank")
+    @NotBlank(message = "Product NameCan not be blank")
     private String productName;
-    @NotBlank(message = "Can not be blank")
+
+    @NotBlank(message = "Product Description Can not be blank")
     private String description;
-    @NotBlank(message = "Can not be blank")
+
+    @NotBlank(message = "Product Price Can not be blank")
     private Double price;
-    @NotBlank(message = "Can not be blank")
+
+    @NotBlank(message = "Product Stock Leve lCan not be blank")
     private int stockLevel;
-    @NotBlank(message = "Can not be blank")
+
+    @NotBlank(message = "Product Category Name Can not be blank")
     private String categoryName;
-    @NotBlank(message = "Can not be blank")
+
+    @NotBlank(message = "Product Supplier Emails Can not be null")
     private Set<String> supplierEmails;
 }

@@ -78,7 +78,7 @@ public class ProductController {
     })
     @GetMapping("/getByCategory")
     public ResponseEntity<CustomResponseDto<List<ProductResponseDto>>> getProductsByCategory(@RequestParam String categoryName) {
-        log.info("Get all products with category: {}",categoryName);
+        log.info("Get all products with category: {}", categoryName);
         CustomResponseDto<List<ProductResponseDto>> responseDto = productService.getProductsByCategory(categoryName);
         log.info("Product response: {}", responseDto);
         return ResponseEntity.ok().body(responseDto);
@@ -99,7 +99,7 @@ public class ProductController {
     })
     @GetMapping("/getByName")
     public ResponseEntity<CustomResponseDto<List<ProductResponseDto>>> getProductsByName(@RequestParam String productName) {
-        log.info("Get all products with with name: {}",productName);
+        log.info("Get all products with with name: {}", productName);
         CustomResponseDto<List<ProductResponseDto>> responseDto = productService.getProductByName(productName);
         log.info("Product by name response: {}", responseDto);
         return ResponseEntity.ok().body(responseDto);
@@ -119,8 +119,8 @@ public class ProductController {
     })
     @GetMapping("/getByPriceRange")
     public ResponseEntity<CustomResponseDto<List<ProductResponseDto>>> getProductsByPriceRange(@RequestParam double minPrice, double maxPrice) {
-        log.info("Price Range Min{} And Max{}: ",minPrice,maxPrice);
-        CustomResponseDto<List<ProductResponseDto>> responseDto = productService.findByPriceBetween(minPrice,maxPrice);
+        log.info("Price Range Min{} And Max{}: ", minPrice, maxPrice);
+        CustomResponseDto<List<ProductResponseDto>> responseDto = productService.findByPriceBetween(minPrice, maxPrice);
         log.info("Product By Price Range response: {}", responseDto);
         return ResponseEntity.ok().body(responseDto);
     }
@@ -139,8 +139,8 @@ public class ProductController {
     })
     @GetMapping("/getByCategoryAndPriceLess")
     public ResponseEntity<CustomResponseDto<List<ProductResponseDto>>> getProductsByCategoryAndPriceLess(@RequestParam String categoryName, double minPrice) {
-        log.info("Price Range Category{} And Min{}: ",categoryName,minPrice);
-        CustomResponseDto<List<ProductResponseDto>> responseDto = productService.findByCategoryAndPriceLessThan(categoryName,minPrice);
+        log.info("Price Range Category{} And Min{}: ", categoryName, minPrice);
+        CustomResponseDto<List<ProductResponseDto>> responseDto = productService.findByCategoryAndPriceLessThan(categoryName, minPrice);
         log.info("Product By CategoryName And Price Less response: {}", responseDto);
         return ResponseEntity.ok().body(responseDto);
     }
@@ -159,8 +159,8 @@ public class ProductController {
     })
     @GetMapping("/getByCategoryAndPriceGreater")
     public ResponseEntity<CustomResponseDto<List<ProductResponseDto>>> getProductsByCategoryAndPriceGreater(@RequestParam String categoryName, double maxPrice) {
-        log.info("Price Range Category{} And Max{}: ",categoryName,maxPrice);
-        CustomResponseDto<List<ProductResponseDto>> responseDto = productService.findByCategoryAndPriceGreaterThan(categoryName,maxPrice);
+        log.info("Price Range Category{} And Max{}: ", categoryName, maxPrice);
+        CustomResponseDto<List<ProductResponseDto>> responseDto = productService.findByCategoryAndPriceGreaterThan(categoryName, maxPrice);
         log.info("Product By CategoryName And Price Greater response: {}", responseDto);
         return ResponseEntity.ok().body(responseDto);
     }

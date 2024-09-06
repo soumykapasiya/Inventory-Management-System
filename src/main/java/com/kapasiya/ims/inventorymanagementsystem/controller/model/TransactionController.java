@@ -2,9 +2,7 @@ package com.kapasiya.ims.inventorymanagementsystem.controller.model;
 
 import com.kapasiya.ims.inventorymanagementsystem.dto.request.TransactionRequestDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.CustomResponseDto;
-import com.kapasiya.ims.inventorymanagementsystem.dto.response.ProductResponseDto;
 import com.kapasiya.ims.inventorymanagementsystem.dto.response.TransactionResponseDto;
-import com.kapasiya.ims.inventorymanagementsystem.entities.model.Transaction;
 import com.kapasiya.ims.inventorymanagementsystem.service.def.model.TransactionService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
