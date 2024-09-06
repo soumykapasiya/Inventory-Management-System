@@ -1,5 +1,6 @@
-package com.kapasiya.ims.inventorymanagementsystem.dto.request;
+package com.kapasiya.ims.inventorymanagementsystem.dto.response;
 
+import com.kapasiya.ims.inventorymanagementsystem.entities.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +12,10 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TransactionRequestDto {
+public class TransactionResponseDto {
     private int quantity;
     private String transactionType;
     private String description;
     private double amount;
-    private List<String> products;
+    private List<Product> products;
 }

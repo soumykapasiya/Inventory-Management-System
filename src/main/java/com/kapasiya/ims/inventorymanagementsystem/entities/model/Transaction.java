@@ -1,9 +1,7 @@
 package com.kapasiya.ims.inventorymanagementsystem.entities.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -12,6 +10,7 @@ import com.kapasiya.ims.inventorymanagementsystem.entities.base.BaseEntity;
 import java.util.List;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)

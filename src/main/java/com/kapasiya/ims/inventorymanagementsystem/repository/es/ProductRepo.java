@@ -1,6 +1,7 @@
 package com.kapasiya.ims.inventorymanagementsystem.repository.es;
 
 import com.kapasiya.ims.inventorymanagementsystem.entities.model.Product;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,6 +10,9 @@ import java.util.List;
 @Repository
 public interface ProductRepo extends ElasticsearchRepository<Product, String> {
     boolean existsByProductName(String productName);
+
+    @Query("{\"match\": {\"productName\": \"?0\"}}")
+    List<Product> findByProductName(String productName);
 
     List<Product> findByProductNameContains(String productName);
 
