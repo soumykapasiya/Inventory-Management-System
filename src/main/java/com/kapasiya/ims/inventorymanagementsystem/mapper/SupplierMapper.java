@@ -11,7 +11,12 @@ public class SupplierMapper {
         throw new IllegalArgumentException("Utility class cannot be instantiated");
     }
 
-    public static Supplier toEntity(SupplierRequestDto requestDto){
+    public static Supplier toEntity(SupplierRequestDto requestDto) {
+
+        if (requestDto == null) {
+            return null;
+        }
+
         return Supplier.builder()
                 .supplierName(requestDto.getSupplierName())
                 .supplierEmail(requestDto.getSupplierEmail())

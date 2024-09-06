@@ -15,7 +15,6 @@ public class CategoryMapper {
         if (requestDto == null) {
             return null;
         }
-
         return Category.builder()
                 .categoryName(requestDto.getCategoryName())
                 .description(requestDto.getDescription())
@@ -26,7 +25,6 @@ public class CategoryMapper {
         if (category == null) {
             return null;
         }
-
         return CategoryResponseDto.builder()
                 .categoryName(category.getCategoryName())
                 .description(category.getDescription())
